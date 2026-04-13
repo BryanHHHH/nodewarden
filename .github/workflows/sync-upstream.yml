@@ -13,9 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # 这里是核心修改：让 checkout 动作使用你的 PAT，
+          # 这样后续的 git push origin main 就会带有 workflow 写入权限
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Configure git
         run: |
